@@ -15,12 +15,13 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from .views import hello
-from id_lookup.views import fbview
+from id_lookup.views import fbview, security_lookup
 
 
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hello/$', hello),
-    url(r'^json/$', fbview)
+    url(r'^json/$', fbview),
+    url(r'^id-lookup/$', security_lookup)
 ]
