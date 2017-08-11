@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hello/$', hello),
     url(r'^json/$', fbview),
-    url(r'^id-lookup/$', security_lookup)
+    url(r'^securities/$', security_lookup)
 ]
