@@ -9,6 +9,7 @@ geneva_report/settings.py
 
 # ignore the database migration files (server side database is different)
 id_lookup/migrations/*
+nav/migrations/*
 
 # ignore the log file
 logs/

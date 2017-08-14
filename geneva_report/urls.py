@@ -16,6 +16,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from .views import hello
 from id_lookup.views import fbview, security_lookup
+import nav.views
 
 
 
@@ -23,5 +24,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hello/$', hello),
     url(r'^json/$', fbview),
-    url(r'^securities/$', security_lookup)
+    url(r'^securities/$', security_lookup),
+    url(r'^nav/$', nav.views.nav),
 ]
