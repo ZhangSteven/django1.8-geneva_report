@@ -11,4 +11,4 @@ geneva_report/settings.py
 id_lookup/migrations/*
 
 # ignore the log file
-id_lookup.log
+logs/
