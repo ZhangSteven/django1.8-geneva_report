@@ -22,6 +22,15 @@ def nav(request):
 		if form.is_valid():
 			logger.debug('nav(): nav form valid: {0}, {1}, {2}'.format(
 							form.cleaned_data['portfolio_id'], form.cleaned_data['date'], form.cleaned_data['nav']))
+			n, created = NavRecord.objects.update_or_create(
+							date=str(form.cleaned_data['date']), portfolio_id=form.cleaned_data['portfolio_id'],
+							defaults={'nav':form.cleaned_data['nav']}
+						)
+			if created:
+				logger.debug('nav(): nav record created')
+			else:
+				logger.debug('nav(): nav record updated')
+
 			return HttpResponse('OK')
 
 		else:
