@@ -25,5 +25,29 @@ urlpatterns = [
     url(r'^hello/$', hello),
     url(r'^json/$', fbview),
     url(r'^securities/$', security_lookup),
-    url(r'^nav/$', nav.views.nav),
+
+	# GET: /nav/, latest nav record for all portfolios
+	# POST: /nav/, update nav record for a portfolio
+	url(r'^nav/$', nav.views.nav),	
+
+	# GET: /nav/20170129/, nav records for all portfolios
+	# 		as of certain date
+	# 
+	# 	   /nav/20170129-20170228/, nav records for all
+	# 		portfolios between two dates
+	# url(r'^nav/([0-9]{8})/$', nav.views.nav_by_date),
+	# url(r'^nav/([0-9]{8}-[0-9]{8})/$', nav.views.nav_by_date),
+	
+	# GET: /nav/19437/, latest nav records for one portfolio
+	# 
+	# 	   /nav/19437/20170129/, nav record for one portfolio
+	# 		as of certain date.
+	# 
+	#	   /nav/19437/20170129-20170228/, nav records for one
+	# 		portfolio between two dates
+	# url(r'^nav/$', nav.views.nav),
+	# url(r'^nav/$', nav.views.nav),
 ]
+
+
+

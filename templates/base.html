@@ -1,0 +1,42 @@
+<!-- This is a template page based on Django Template Language (DTL) -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+
+<head>
+	<title>{% block title %}Portfolio Listing{% endblock %}</title>
+
+<style type="text/css">
+	/* style samples comes from https://www.w3schools.com/css/css_table.asp*/
+	/* below is to create border for tables and text align left. */
+	table {
+		border-collapse: collapse;
+		width: 70%;
+	}
+
+	table, th, td {
+		border: 1px solid black;
+	}
+
+	th {
+		text-align: left;
+		height: 40px;
+	}
+</style>
+</head>
+
+<body>
+	<!-- a block named 'heading' -->
+	{% block heading %}
+	<h1>Portfolio Listing</h1>
+	{% endblock %}
+	
+	<!-- a block named 'content' -->
+	{% block content %}{% endblock %}
+
+	<!-- a block named 'footer', with default content -->
+	{% block footer %}
+	<hr>
+	<p>Thanks for visiting my site.</p>
+	{% endblock %}
+</body>
+</html>

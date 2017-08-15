@@ -1,0 +1,28 @@
+<!-- This is a template page based on Django Template Language (DTL) -->
+{% extends 'base.html' %}
+
+{% block heading %}
+<h1>Latest NAV</h1>
+{% endblock %}
+
+{% block content %}
+<table>
+	<tr>
+		<th>Portfolio</th>
+		<th>Date</th>
+		<th>Nav</th>
+		<th>Units</th>
+		<th>Unit Price</th>
+	</tr>
+
+{% for r in result %}
+	<tr>
+		<td>{{ r.portfolio_id }}</td>
+		<td>{{ r.date }}</td>
+		<td>{{ r.nav}} </td>
+		<td>{{ r.num_units }}</td>
+		<td>{{ r.unit_price }}</td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}
