@@ -7,8 +7,8 @@ import logging
 # to make certain views exempt from security protection
 from django.views.decorators.csrf import csrf_exempt
 
-# Get an instance of a logger
-logger = logging.getLogger('app_id_lookup')
+# Get an instance of a logger (needs to define the logger first in settings.py)
+logger = logging.getLogger('__name__')
 
 
 

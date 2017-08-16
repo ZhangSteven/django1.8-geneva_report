@@ -1,6 +1,8 @@
 # All forms class for the Book app goes here.
 from django import forms
 import re
+import logging
+logger = logging.getLogger(__name__)
 
 
 
@@ -21,12 +23,16 @@ class NavForm(forms.Form):
 
 		return nav
 	
+
+
 	def clean_num_units(self):
 		num_units = self.cleaned_data['num_units']
 		if num_units <= 0:
 			raise forms.ValidationError('num_units {0} is negative'.format(num_units))
 
 		return num_units
+
+
 
 	def clean_unit_price(self):
 		unit_price = self.cleaned_data['unit_price']
@@ -35,9 +41,11 @@ class NavForm(forms.Form):
 
 		return unit_price
 	
+
+
 	def clean_portfolio_id(self):
 		id = self.cleaned_data['portfolio_id']
 		if re.search('[0-9]{5}', id) is None:	# id is a 5-digit string
-			raise forms.ValidationError('portfolio_id {0} is not valid'.format(id))
+			raise forms.ValidationError('portfolio_id {0} is invalid'.format(id))
 
 		return id

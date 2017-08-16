@@ -6,7 +6,7 @@ from .view_handler import get_latest_navrecords
 
 # Get an instance of a logger
 import logging
-logger = logging.getLogger('app_nav')
+logger = logging.getLogger(__name__)
 
 # to make certain views exempt from security protection
 from django.views.decorators.csrf import csrf_exempt

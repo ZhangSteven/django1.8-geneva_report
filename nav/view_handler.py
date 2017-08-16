@@ -6,7 +6,7 @@ from datetime import date, timedelta
 
 # Get an instance of a logger
 import logging
-logger = logging.getLogger('app_nav')
+logger = logging.getLogger(__name__)
 
 
 
