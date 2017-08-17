@@ -13,3 +13,6 @@ nav/migrations/*
 
 # ignore the log file
 logs/
+
+# ignore the static files
+static/
