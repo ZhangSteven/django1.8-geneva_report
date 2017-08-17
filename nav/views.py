@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from .models import NavRecord
 from .forms import NavForm
-from .view_handler import get_latest_navrecords
+from .view_handler import get_latest_navrecords, get_history_navrecords
+from datetime import date
 
 # Get an instance of a logger
 import logging
@@ -43,3 +44,12 @@ def nav(request):
 	elif request.method == 'GET':
 		result = get_latest_navrecords()
 		return render(request, 'latest.html', {'result':result})
+
+
+
+def nav_history(request, portfolio_id, history):
+	logger.info('nav_history(): portfolio_id={0}, history={1}'.format(portfolio_id, history))
+	if history == 'ytd':
+		date1 = date(date.today().year, 1, 1)
+		result = get_history_navrecords(portfolio_id, date1, date.today())
+		return render(request, 'holding.html', {'portfolio_id':portfolio_id, 'result':result})

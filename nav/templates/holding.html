@@ -1,0 +1,37 @@
+<!-- This is a template page based on Django Template Language (DTL) -->
+{% extends 'base.html' %}
+
+<!-- load the humanize filters, to apply thousand separator (intcomma) -->
+{% load humanize %}
+
+{% block heading %}
+
+{% if result %}
+	<h1>Historical NAV for Portfolio {{ portfolio_id }}</h1>
+{% else %}
+	<h1>No holdings found for Portfolio {{ portfolio_id }}</h1>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if result %}
+	<table>
+		<tr>
+			<th>Date</th>
+			<th>Nav</th>
+			<th>Units</th>
+			<th>Unit Price</th>
+		</tr>
+
+	{% for r in result %}
+		<tr>
+			<td>{{ r.date }}</td>
+			<td>{{ r.nav|floatformat:2|intcomma }} </td>
+			<td>{{ r.num_units|floatformat:2|intcomma }}</td>
+			<td>{{ r.unit_price|floatformat:4 }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+{% endblock %}

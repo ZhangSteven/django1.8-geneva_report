@@ -2,7 +2,9 @@
 # 
 # Here we put all functions that will be called from within the views.
 from .models import Portfolio, NavRecord
+from django.core.exceptions import ObjectDoesNotExist
 from datetime import date, timedelta
+
 
 # Get an instance of a logger
 import logging
@@ -35,3 +37,24 @@ def get_latest_navrecords():
 			result.append(nav_records.order_by('-date')[0])
 
 	return result
+
+
+
+def get_history_navrecords(portfolio_id, date1, date2):
+	"""
+	Get a list of NavRecord objects whose date is in between date1 and date2, inclusive.
+
+	The objects are sorted by date, earlier dates come first.
+	"""
+	logger.info('get_history_navrecords(): enter')
+	try:
+		Portfolio.objects.get(portfolio_id=portfolio_id)
+	except ObjectDoesNotExist:
+		logger.error('get_history_navrecords(): portfolio id {0} does not exist'.format(portfolio_id))
+		return None
+
+	logger.debug('portfolio_id={2}, date1={0}, date2={1}'.format(date1, date2, portfolio_id))
+	nav_records = NavRecord.objects.filter(portfolio_id=portfolio_id,
+												date__gte=date1, date__lte=date2)
+	logger.debug('get {0} results'.format(len(nav_records)))
+	return nav_records.order_by('date')

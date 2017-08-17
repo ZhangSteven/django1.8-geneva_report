@@ -38,15 +38,13 @@ urlpatterns = [
 	# url(r'^nav/([0-9]{8})/$', nav.views.nav_by_date),
 	# url(r'^nav/([0-9]{8}-[0-9]{8})/$', nav.views.nav_by_date),
 	
-	# GET: /nav/19437/, latest nav records for one portfolio
+	# GET:  
+	# 	   /nav/19437/ytd/, nav record for 19437, year to date
+	# 	   /nav/19437/mtd/, nav record for 19437, month to date
+	# 	   /nav/19437/30/, nav record for 19437, for the last 30 days
 	# 
-	# 	   /nav/19437/20170129/, nav record for one portfolio
-	# 		as of certain date.
-	# 
-	#	   /nav/19437/20170129-20170228/, nav records for one
-	# 		portfolio between two dates
-	# url(r'^nav/$', nav.views.nav),
-	# url(r'^nav/$', nav.views.nav),
+	url(r'^nav/([0-9]{5})/([a-zA-Z]{3})/$', nav.views.nav_history),
+	url(r'^nav/([0-9]{5})/([0-9]{2})/$', nav.views.nav_history),
 ]
 
 
