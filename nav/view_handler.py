@@ -46,15 +46,19 @@ def get_history_navrecords(portfolio_id, date1, date2):
 
 	The objects are sorted by date, earlier dates come first.
 	"""
-	logger.info('get_history_navrecords(): enter')
-	try:
-		Portfolio.objects.get(portfolio_id=portfolio_id)
-	except ObjectDoesNotExist:
-		logger.error('get_history_navrecords(): portfolio id {0} does not exist'.format(portfolio_id))
-		return None
-
-	logger.debug('portfolio_id={2}, date1={0}, date2={1}'.format(date1, date2, portfolio_id))
+	logger.info('get_history_navrecords(): enter: portfolio_id={2}, date1={0}, date2={1}'
+					.format(date1, date2, portfolio_id))
 	nav_records = NavRecord.objects.filter(portfolio_id=portfolio_id,
 												date__gte=date1, date__lte=date2)
 	logger.debug('get {0} results'.format(len(nav_records)))
 	return nav_records.order_by('date')
+
+
+
+def portfolio_exists(portfolio_id):
+	try:
+		Portfolio.objects.get(portfolio_id=portfolio_id)
+	except ObjectDoesNotExist:
+		return False
+
+	return True

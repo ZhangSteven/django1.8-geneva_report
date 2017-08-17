@@ -44,7 +44,7 @@ urlpatterns = [
 	# 	   /nav/19437/30/, nav record for 19437, for the last 30 days
 	# 
 	url(r'^nav/([0-9]{5})/([a-zA-Z]{3})/$', nav.views.nav_history),
-	url(r'^nav/([0-9]{5})/([0-9]{2})/$', nav.views.nav_history),
+	url(r'^nav/([0-9]{5})/(\d+)/$', nav.views.nav_history),
 ]
 
 

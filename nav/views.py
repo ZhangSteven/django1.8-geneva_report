@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from .models import NavRecord
 from .forms import NavForm
-from .view_handler import get_latest_navrecords, get_history_navrecords
-from datetime import date
+from .view_handler import get_latest_navrecords, get_history_navrecords, \
+							portfolio_exists
+from datetime import date, timedelta
 
 # Get an instance of a logger
 import logging
@@ -49,7 +50,24 @@ def nav(request):
 
 def nav_history(request, portfolio_id, history):
 	logger.info('nav_history(): portfolio_id={0}, history={1}'.format(portfolio_id, history))
-	if history == 'ytd':
-		date1 = date(date.today().year, 1, 1)
-		result = get_history_navrecords(portfolio_id, date1, date.today())
-		return render(request, 'holding.html', {'portfolio_id':portfolio_id, 'result':result})
+	if not portfolio_exists(portfolio_id):
+		return render(request, 'error.html', 
+						{'error_message':'Sorry, portfolio {0} does not exist.'.format(portfolio_id)}) 
+
+	if history in ['ytd', 'mtd']:
+		if history == 'ytd':
+			date1 = date(date.today().year, 1, 1)
+		else:
+			date1 = date(date.today().year, date.today().month, 1)
+		
+	else:
+		try:
+			history = int(history)
+			date1 = date.today() - timedelta(days=history)
+		except:
+			logger.error('nav_history(): history {0} is not a valid indicator'.format(history))
+			return render(request, 'error.html', 
+							{'error_message': 'Sorry, {0} is not a valid request'.format(request.get_full_path())})
+
+	result = get_history_navrecords(portfolio_id, date1, date.today())
+	return render(request, 'holding.html', {'portfolio_id':portfolio_id, 'result':result})

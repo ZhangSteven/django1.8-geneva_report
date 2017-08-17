@@ -1,0 +1,16 @@
+<!-- This is a template page based on Django Template Language (DTL) -->
+<!-- To use "statuc" tag we need to have this -->
+{% load staticfiles %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+
+<head>
+	<title>Error</title>
+	<link rel="shortcut icon" type="image/png" href={% static "favicon.ico" %} />
+</head>
+
+<body>
+	<h1>{{ error_message }}</h1>
+</body>
+</html>
