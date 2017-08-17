@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from .models import NavRecord
 from .forms import NavForm
 from .view_handler import get_latest_navrecords, get_history_navrecords, \
-							portfolio_exists
+							portfolio_exists, get_portfolio_name
 from datetime import date, timedelta
 
 # Get an instance of a logger
@@ -70,4 +70,5 @@ def nav_history(request, portfolio_id, history):
 							{'error_message': 'Sorry, {0} is not a valid request'.format(request.get_full_path())})
 
 	result = get_history_navrecords(portfolio_id, date1, date.today())
-	return render(request, 'holding.html', {'portfolio_id':portfolio_id, 'result':result})
+	return render(request, 'holding.html', {'portfolio':get_portfolio_name(portfolio_id), 
+											'result':result})

@@ -62,3 +62,11 @@ def portfolio_exists(portfolio_id):
 		return False
 
 	return True
+
+
+
+def get_portfolio_name(portfolio_id):
+	try:
+		return Portfolio.objects.get(portfolio_id=portfolio_id).name
+	except ObjectDoesNotExist:
+		return ''
