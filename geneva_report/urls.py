@@ -14,17 +14,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from .views import hello
 from id_lookup.views import fbview, security_lookup
+import geneva_report.views
 import nav.views
 
 
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hello/$', hello),
+    url(r'^hello/$', geneva_report.views.hello),
     url(r'^json/$', fbview),
     url(r'^securities/$', security_lookup),
+
+    url(r'^form-serial/$', geneva_report.views.form_serial),
 
 	# GET: /nav/, latest nav record for all portfolios
 	# POST: /nav/, update nav record for a portfolio
